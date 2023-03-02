@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REACT</title>
+</head>
+<body>
+<h1>REACT</h1>
+<h2>React is a library for building user interfaces.
+    Facebook created React
+</h2>
+<h3>SPA(single-page-application)</h3>
+<p>
+    A single-page application is an app that works inside 
+    a browser and does not require page reloading during use. 
+    You are using this type of applications every day. 
+    These are, for instance: Gmail, Google Maps, Facebook or GitHub.
+
+    // So client request only one per pages HTML, JS, CSS.
+    // for example: If client want to get to another page by navigation, 
+    // this is executing on front end
+    // no need more request to server( back-end) 
+    // also client still have oportunity to make request to back-end and ask for some data 
+</p>
+<h3>SPA advantages:</h3>
+<h4>
+    1) Web page is not reloading during navigation over the page
+    2) Instantly(МОМЕНТАЛЬНО) re-rendering web-page' s elements, 
+    cause we have ability rerender certain(ОПРЕДЕЛЁННЫЕ) elements(only which we want), not all page
+    3) Easier for publication in production cause it have small quantity of static files
+    4)Internet connections will be more effective due to decrease their quantity and decrease delay between requests  
+    and only first acess to site will be "long" and other one "react"
+</h4>
+<h3>SPA disadvantages:</h3>
+<p>
+    1) For SEO need special options, becuse SPA have only one page 
+    2) Long first connection due to big JS file
+</p>
+<h2>REACT BASE</h2>
+<p>
+    
+    Reloading whole DOM is hard operation.
+    React have 'virtual DOM' which is only JavaScript's object 
+    So before changing real DOM react change virtual DOM and as virtual DOM is object, 
+    it happens almost instantly.
+    So  per each change on page firstly change virtual DOM only after real DOM
+    Example:
+    Botton clicked // so state of some element(button) has changed
+    react firstly change state in the element which is in virtual DOM 
+    but as this element has children, 
+    then changing his state will call changing chuldren's state automatically.
+    And this is give ability also to change them or to left them 
+    // After react compare 2 DOM's states(VERSIONS or CONDITIONS):
+    CURRENT AND PREVIOUS
+    React compares it by each changed element by comparing their state(СОСТОЯНИЯ) to find what exactly change in element.
+    After react defines which exactly elemnts were changed and which with out changes(differences):
+    (for example one element changed his 2 children also chenged another 3 children were left with out changes)
+    So only this changed lements wil be re-rendered in real DOM.
+    There is no full page re-render.There is only selective rendering(Точечная перересовка)ю
+    So Virtual DOM collected little bit changes and then only real DOM rendering
+</p>
+<h2>BASE CONCEPTS IN REACT</h2>
+<h3>
+    -Components (building blocks of React applications.
+    They are independent and reusable parts of the user interface that can have their own internal state and properties (props).)
+    
+    - JSX (Jsvascript Syntax Extencion)  This is a JavaScript syntax extension that allows combining HTML-like(CSS) tags 
+    and JavaScript expressions into a single React component. 
+    JSX simplifies the creation of components and improves code readability.
+
+    -PROPS(СВОЙСТВА) (pass data from the parent component to the child component.)
+
+    -STATES(СОСТОЯНИЯ) (State allows storing data that can change during the component's lifecycle. )
+</h3>
+
+
+<h2>components</h2>
+<h3>characteristics of components</h3>
+<p>
+    - Components are reusable in different part of application
+    - Components provide clear and hierarchical(иерархическую) systemю
+    -  Components can be controlled from the outside using props(СВОЙСТВА) // they are like "arguments during call function"
+                                                                            // cause arguments give oportunity to control function behavior
+                                                                            // or control the result of function
+    - Each component can have his own state(Состояние).Each state affects on component and his children but not parrent's elements.
+    -  Each component is responsible for a separate part of the logical interface.
+    
+</p>
+
+<p>
+    Component consists: HTML, CSS, JavaScript // they are united(объеденены) in one component
+    <p>
+        // BETTER WITH ARROW FUNCTION BECAUSE variable with const cannot be assigned by another value
+const HelloWorld = () => {
+    return <h1>Hello World</h1>  // return in JSX format
+}
+
+////////////////////////////////////////////
+// Class component
+
+class HelloWorld1 extends Comment {
+    render() {                          // mandatory method render(), determines what is to be rendered
+        return <h1>Hello World</h1>    // return in JSX format
+    }
+}
+    </p>
+    <h2>
+        JSX(JavaScript Syntax Extencion)
+    </h2>
+    <p>
+        //======================= JSX
+
+<!-- <Card
+    style={{
+        backgroundColor: `rgb(${initialColor}, ${opacity})`,
+    }}
+    className="m-2"
+>
+    <Card.Img
+        variant="top"
+        style={
+            imageLoaded
+                ? { opacity: 1, transition: 'opacity 2s easy-in-out' }
+                : { opacity: 0 }
+        }
+        src={image}
+        alt={title}
+        onLoad={() => setImageLoaded(true)}
+    />
+</Card> -->
+
+//
+// ======================on pure JS
+
+React.createElement(Card, {
+    style: {
+        backgroundColor: `rgb(${initialColor}, ${opacity})`
+    },
+    className: "m-2"
+}, React.createElement(Card.Img, {
+    variant: "top",
+    style: imageLoaded ? {
+        opacity: 1,
+        transition: 'opacity 2s easy-in-out'
+    } : {
+        opacity: 0
+    },
+    src: image,
+    alt: tittle,
+    onLoad: () => setImageLoaded(true)
+})
+)
+
+    </p>
+<h3>IN JSX there are custom(ПОЛЬЗОВАТЕЛЬСКИЕ) and built-in(ВСТРОЕННЫЕ) components in JSX</h3>
+<p>
+    
+return (
+    <div>
+        <h1>JSX in REACT</h1>     // built-in(ВСТРОЕННЫЙ) component
+        <p> JSX looks like HTML </p> 
+        <Footer text={text} />   // custom(ПОЛЬЗОВАТЕЛЬСКИй) component
+    </div>
+)
+
+</p>
+<h4>React distinguish(различает) type of component by first letter after opening tag "<".
+If it is capital letter it is custom component
+If it is small letter it is built-in component</h4>
+<h4>JSX must have one root element</h4>
+<h2>PROPS(СВОЙСТВА) and STATES(СОСТОЯНИЯ) </h2>
+<h3>Component's props are getted prom parrent component </h3>
+<p>We can not sent props from child component to parrent component</p>
+<h4>Component should not change it's own props</h4> // for this target we have parent element
+<h4>Component can change it's own state and can not change other component's state // 
+    but can influence(влиять) on changing state of other components by request </h4>
+    <h4>It is possible to transfer component's some props and states to it's children's components as props </h4>
+    <h4>Component will be re-render, if it's props or state changed</h4>
+    <h2>React hooks</h2>
+    <h3>Reack hooks give ability to control state in functional components</h3>
+    <h4>Main hooks: // useState  and useEffect</h4>
+
+
+<script src="./index.js" type="module"></script>
+</body>
+</html>
